@@ -1042,7 +1042,7 @@ static const struct coex_rf_para rf_para_rx_8812a[] = {
 	{0, 28, true, 5}
 };
 
-static_assert(ARRAY_SIZE(rf_para_tx_8812a) == ARRAY_SIZE(rf_para_rx_8812a));
+#define RTW8812A_RF_PARA_SIZE_CHECK (sizeof(rf_para_tx_8812a) / sizeof(rf_para_tx_8812a[0]) == sizeof(rf_para_rx_8812a) / sizeof(rf_para_rx_8812a[0]))
 
 const struct rtw_chip_info rtw8812a_hw_spec = {
 	.ops = &rtw8812a_ops,

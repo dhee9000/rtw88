@@ -2383,19 +2383,23 @@ int rtw_register_hw(struct rtw_dev *rtwdev, struct ieee80211_hw *hw)
 	hw->wiphy->max_scan_ssids = RTW_SCAN_MAX_SSIDS;
 	hw->wiphy->max_scan_ie_len = rtw_get_max_scan_ie_len(rtwdev);
 
-	if (!sta_mode_only) {
-		hw->wiphy->iface_combinations = rtw_iface_combs;
-		hw->wiphy->n_iface_combinations = ARRAY_SIZE(rtw_iface_combs);
-	}
-
+	/* Only enable newer NL80211 features if they are available in the kernel */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 2, 0)
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_CAN_REPLACE_PTK0);
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_SCAN_RANDOM_SN);
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_SET_SCAN_DWELL);
+#endif
 
 #ifdef CONFIG_PM
 	hw->wiphy->wowlan = rtwdev->chip->wowlan_stub;
 	hw->wiphy->max_sched_scan_ssids = rtwdev->chip->max_sched_scan_ssids;
 #endif
+
+	if (!sta_mode_only) {
+		hw->wiphy->iface_combinations = rtw_iface_combs;
+		hw->wiphy->n_iface_combinations = ARRAY_SIZE(rtw_iface_combs);
+	}
+
 	rtw_set_supported_band(hw, rtwdev->chip);
 	SET_IEEE80211_PERM_ADDR(hw, rtwdev->efuse.addr);
 

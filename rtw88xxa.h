@@ -61,7 +61,7 @@ struct rtw88xxa_efuse {
 	};
 } __packed;
 
-static_assert(sizeof(struct rtw88xxa_efuse) == 512);
+#define RTW88XXA_EFUSE_SIZE_CHECK (sizeof(struct rtw88xxa_efuse) == 512)
 
 #define WLAN_BCN_DMA_TIME			0x02
 #define WLAN_TBTT_PROHIBIT			0x04

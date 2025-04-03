@@ -34,7 +34,19 @@ static struct sdio_driver rtw_8723ds_driver = {
 		.shutdown = rtw_sdio_shutdown,
 	}
 };
-module_sdio_driver(rtw_8723ds_driver);
+
+static int __init rtw8723ds_init(void)
+{
+	return sdio_register_driver(&rtw_8723ds_driver);
+}
+
+static void __exit rtw8723ds_exit(void)
+{
+	sdio_unregister_driver(&rtw_8723ds_driver);
+}
+
+module_init(rtw8723ds_init);
+module_exit(rtw8723ds_exit);
 
 MODULE_AUTHOR("Martin Blumenstingl <martin.blumenstingl@googlemail.com>");
 MODULE_DESCRIPTION("Realtek 802.11n wireless 8723ds driver");

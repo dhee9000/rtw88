@@ -1115,7 +1115,7 @@ static const struct coex_rf_para rf_para_rx_8821a[] = {
 	{0, 28, true, 5}
 };
 
-static_assert(ARRAY_SIZE(rf_para_tx_8821a) == ARRAY_SIZE(rf_para_rx_8821a));
+#define RTW8821A_RF_PARA_SIZE_CHECK (ARRAY_SIZE(rf_para_tx_8821a) == ARRAY_SIZE(rf_para_rx_8821a))
 
 static const struct coex_5g_afh_map afh_5g_8821a[] = { {0, 0, 0} };
 

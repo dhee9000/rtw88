@@ -284,7 +284,12 @@ static void rtw_rx_fill_rx_status(struct rtw_dev *rtwdev,
 	 * simply drops the packet.
 	 */
 	if (rtwdev->chip->id == RTW_CHIP_TYPE_8703B && pkt_stat->pkt_len == 0) {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 19, 0)
 		rx_status->flag |= RX_FLAG_NO_PSDU;
+#else
+		/* For older kernels, we'll just mark it as a bad frame */
+		rx_status->flag |= RX_FLAG_FAILED_FCS_CRC;
+#endif
 		rtw_dbg(rtwdev, RTW_DBG_RX, "zero length packet");
 	}
 }

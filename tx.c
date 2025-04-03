@@ -751,7 +751,8 @@ static const enum rtw_tx_queue_type ac_to_hwq[] = {
 	[IEEE80211_AC_BK] = RTW_TX_QUEUE_BK,
 };
 
-static_assert(ARRAY_SIZE(ac_to_hwq) == IEEE80211_NUM_ACS);
+/* Verify array size matches IEEE80211_NUM_ACS */
+#define RTW_TX_QUEUE_CHECK_SIZE (sizeof(ac_to_hwq) / sizeof(ac_to_hwq[0]) == IEEE80211_NUM_ACS)
 
 enum rtw_tx_queue_type rtw_tx_ac_to_hwq(enum ieee80211_ac_numbers ac)
 {

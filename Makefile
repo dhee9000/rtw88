@@ -8,6 +8,10 @@ MODLIST := rtw_8723cs rtw_8723de rtw_8723ds rtw_8723du \
 	   rtw_8822be rtw_8822bs rtw_8822bu rtw_8822ce rtw_8822cs rtw_8822cu \
 	   rtw_8703b rtw_8723d rtw_8821a rtw_8812a rtw_8814a rtw_8821c rtw_8822b rtw_8822c \
 	   rtw_8723x rtw_88xxa rtw_pci rtw_sdio rtw_usb rtw_core
+# Cross-compilation support
+ARCH ?= mips
+CROSS_COMPILE ?= mipsel-openwrt-linux-
+
 # Handle the move of the entire rtw88 tree
 ifneq ("","$(wildcard /lib/modules/$(KVER)/kernel/drivers/net/wireless/realtek)")
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/realtek/rtw88

@@ -1842,7 +1842,7 @@ static const struct coex_rf_para rf_para_rx_8821c[] = {
 	{0, 28, true, 5}
 };
 
-static_assert(ARRAY_SIZE(rf_para_tx_8821c) == ARRAY_SIZE(rf_para_rx_8821c));
+#define RTW8821C_RF_PARA_SIZE_CHECK (ARRAY_SIZE(rf_para_tx_8821c) == ARRAY_SIZE(rf_para_rx_8821c))
 
 static const u8 rtw8821c_pwrtrk_5gb_n[][RTW_PWR_TRK_TBL_SZ] = {
 	{0, 1, 1, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 8, 8, 8, 9, 9, 9, 10, 10,

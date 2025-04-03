@@ -64,7 +64,7 @@ static const struct cfg80211_sar_freq_ranges rtw_common_sar_freq_ranges[] = {
 	[RTW_SAR_BAND_4] = { .start_freq = 5745, .end_freq = 5825, },
 };
 
-static_assert(ARRAY_SIZE(rtw_common_sar_freq_ranges) == RTW_SAR_BAND_NR);
+#define RTW_SAR_FREQ_RANGES_CHECK (ARRAY_SIZE(rtw_common_sar_freq_ranges) == RTW_SAR_BAND_NR)
 
 const struct cfg80211_sar_capa rtw_sar_capa = {
 	.type = NL80211_SAR_TYPE_POWER,

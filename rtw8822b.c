@@ -2351,7 +2351,8 @@ static const struct coex_5g_afh_map afh_5g_8822b[] = {
 	{138, 37, 34},
 	{155, 68, 20}
 };
-static_assert(ARRAY_SIZE(rf_para_tx_8822b) == ARRAY_SIZE(rf_para_rx_8822b));
+
+#define RTW8822B_RF_PARA_SIZE_CHECK (sizeof(rf_para_tx_8822b) / sizeof(rf_para_tx_8822b[0]) == sizeof(rf_para_rx_8822b) / sizeof(rf_para_rx_8822b[0]))
 
 static const u8
 rtw8822b_pwrtrk_5gb_n[RTW_PWR_TRK_5G_NUM][RTW_PWR_TRK_TBL_SZ] = {

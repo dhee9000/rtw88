@@ -2233,7 +2233,12 @@ static void rtw_fw_set_scan_offload(struct rtw_dev *rtwdev,
 	struct rtw_fifo_conf *fifo = &rtwdev->fifo;
 	/* reserve one dummy page at the beginning for tx descriptor */
 	u8 pkt_loc = fifo->rsvd_h2c_info_addr - fifo->rsvd_boundary + 1;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 19, 0)
 	bool random_seq = req->flags & NL80211_SCAN_FLAG_RANDOM_SN;
+#else
+	/* For older kernels, we'll just use random address flag as an alternative */
+	bool random_seq = req->flags & NL80211_SCAN_FLAG_RANDOM_ADDR;
+#endif
 	u8 h2c_pkt[H2C_PKT_SIZE] = {0};
 
 	rtw_h2c_pkt_set_header(h2c_pkt, H2C_PKT_SCAN_OFFLOAD);

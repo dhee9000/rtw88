@@ -55,7 +55,7 @@ struct rtw8814a_efuse {
 	u8 res5[0x122];			/* 0xde */
 } __packed;
 
-static_assert(sizeof(struct rtw8814a_efuse) == 512);
+#define RTW8814A_EFUSE_SIZE_CHECK (sizeof(struct rtw8814a_efuse) == 512)
 
 extern const struct rtw_chip_info rtw8814a_hw_spec;
 
