@@ -1013,7 +1013,23 @@ static void rtw_sdio_rxfifo_recv(struct rtw_dev *rtwdev, u32 rx_len)
 			break;
 		}
 
-		skb_copy_header(split_skb, skb);
+		split_skb->priority = skb->priority;
+		split_skb->protocol = skb->protocol;
+		split_skb->pkt_type = skb->pkt_type;
+		split_skb->ip_summed = skb->ip_summed;
+		split_skb->csum = skb->csum;
+		split_skb->hash = skb->hash;
+		split_skb->l4_hash = skb->l4_hash;
+		split_skb->sw_hash = skb->sw_hash;
+		split_skb->vlan_proto = skb->vlan_proto;
+		split_skb->vlan_tci = skb->vlan_tci;
+		split_skb->transport_header = skb->transport_header;
+		split_skb->network_header = skb->network_header;
+		split_skb->mac_header = skb->mac_header;
+		split_skb->inner_protocol = skb->inner_protocol;
+		split_skb->inner_transport_header = skb->inner_transport_header;
+		split_skb->inner_network_header = skb->inner_network_header;
+		split_skb->inner_mac_header = skb->inner_mac_header;
 		memcpy(split_skb->data, skb->data, curr_pkt_len);
 
 		rtw_sdio_rx_skb(rtwdev, split_skb, pkt_offset, &pkt_stat,

@@ -1496,7 +1496,7 @@ static void rtw_pci_phy_cfg(struct rtw_dev *rtwdev)
 	/* Disable 8821ce completion timeout by default */
 	if (chip->id == RTW_CHIP_TYPE_8821C) {
 		ret = pcie_capability_set_word(pdev, PCI_EXP_DEVCTL2,
-					       PCI_EXP_DEVCTL2_COMP_TMOUT_DIS);
+					       PCI_EXP_DEVCTL2_COMP_TIMEOUT);
 		if (ret)
 			rtw_err(rtwdev, "failed to set PCI cap, ret = %d\n",
 				ret);
