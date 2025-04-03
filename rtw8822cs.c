@@ -29,7 +29,19 @@ static struct sdio_driver rtw_8822cs_driver = {
 		.shutdown = rtw_sdio_shutdown,
 	}
 };
-module_sdio_driver(rtw_8822cs_driver);
+
+static int __init rtw8822cs_init(void)
+{
+	return sdio_register_driver(&rtw_8822cs_driver);
+}
+
+static void __exit rtw8822cs_exit(void)
+{
+	sdio_unregister_driver(&rtw_8822cs_driver);
+}
+
+module_init(rtw8822cs_init);
+module_exit(rtw8822cs_exit);
 
 MODULE_AUTHOR("Martin Blumenstingl <martin.blumenstingl@googlemail.com>");
 MODULE_DESCRIPTION("Realtek 802.11ac wireless 8822cs driver");
